@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Khusus Buat Sinta ❤️</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Caveat:wght@700&display=swap');
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #fff0f3;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        #card {
+            background: white;
+            width: 85%;
+            max-width: 360px;
+            padding: 30px;
+            border-radius: 25px;
+            box-shadow: 0 15px 35px rgba(255, 71, 126, 0.2);
+            position: relative;
+            z-index: 100;
+            border: 2px solid #ffb3c1;
+        }
+
+        .content { display: none; }
+        .active { display: block !important; }
+
+        h2 { color: #ff477e; margin-bottom: 15px; font-size: 1.4rem; }
+        p { font-size: 0.95rem; color: #555; line-height: 1.6; }
+
+        button {
+            background: #ff477e;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            margin: 10px 5px;
+            transition: 0.3s;
+            display: inline-block;
+        }
+
+        button:hover { transform: scale(1.05); background: #ff758f; }
+
+        #btn-ngeselin { background: #ced4da; color: #444; }
+
+        .foto-frame {
+            width: 160px;
+            height: 160px;
+            margin: 0 auto 20px;
+            border: 5px solid #ff477e;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+
+        .foto-frame img { width: 100%; height: 100%; object-fit: cover; }
+
+        input[type=range] { 
+            width: 100%; 
+            cursor: pointer; 
+            accent-color: #ff477e;
+            margin-top: 15px;
+        }
+
+        .teks-romantis {
+            font-family: 'Caveat', cursive;
+            font-size: 1.4rem;
+            color: #c9184a;
+            margin-top: 15px;
+        }
+
+        .bunga {
+            position: fixed;
+            top: -50px;
+            pointer-events: none;
+            z-index: 999;
+            animation: jatuh linear forwards;
+        }
+
+        @keyframes jatuh {
+            to { transform: translateY(110vh) rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="card">
+        <div id="step1" class="content active">
+            <h2>Halo Sinta Sayang... ✨</h2>
+            <p>Tau gak? Dari sekian banyak orang di dunia, cuma kamu yang bisa bikin duniaku jauh lebih berwarna. Ada sesuatu yang mau aku kasih tau ke kamu...</p>
+            <button onclick="pindah(1, 2)">Apa itu? 🥺</button>
+            <button id="btn-ngeselin" onmouseover="lari(this)" onclick="lari(this)">Gak tertarik!</button>
+        </div>
+
+        <div id="step2" class="content">
+            <h2>Yakin mau liat? 🧐</h2>
+            <p>Nanti kalau kamu makin sayang sama aku, jangan salahin aku ya? Yakin mau lanjut?</p>
+            <button onclick="pindah(2, 3)">Yakin banget!</button>
+        </div>
+
+        <div id="step3" class="content">
+            <h2>Seberapa sayang kamu? ❤️</h2>
+            <p>Coba geser hatinya sampai 1000% buat aku!</p>
+            <input type="range" min="0" max="1000" value="0" oninput="cekSlider(this.value)">
+            <h3 style="color:#ff477e; margin-top: 10px;"><span id="angka">0</span>% Love</h3>
+        </div>
+
+        <div id="step4" class="content">
+            <div class="foto-frame">
+                <img src="https://i.ibb.co.com/YBHsDGPW/image.jpg" alt="Foto Kita">
+            </div>
+            <div class="teks-romantis">
+                "Terimakasih udah mau dateng ke hidupku, aku bener-bener bersyukur ketemu orang yang bener-bener cocok sama aku..."
+                <br><br>
+                "Setiap detik sama kamu itu berharga banget buat aku. Makasih ya udah jadi milikku."
+                <br><br>
+                <strong>"Just want to say thank you for being in my life, you're so special to me." ❤️</strong>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function pindah(skrg, tujuan) {
+            document.getElementById('step' + skrg).classList.remove('active');
+            document.getElementById('step' + tujuan).classList.add('active');
+        }
+
+        function lari(btn) {
+            const x = Math.random() * (window.innerWidth - btn.offsetWidth);
+            const y = Math.random() * (window.innerHeight - btn.offsetHeight);
+            btn.style.position = "fixed";
+            btn.style.left = x + "px";
+            btn.style.top = y + "px";
+            btn.style.zIndex = "1000";
+        }
+
+        function cekSlider(val) {
+            document.getElementById('angka').innerText = val;
+            if (val >= 1000) {
+                pindah(3, 4);
+                hujanBunga();
+            }
+        }
+
+        function hujanBunga() {
+            const jenis = ['🌸', '💖', '🌹', '❤️', '✨', '🌷'];
+            for (let i = 0; i < 200; i++) {
+                setTimeout(() => {
+                    const b = document.createElement('div');
+                    b.className = 'bunga';
+                    b.innerHTML = jenis[Math.floor(Math.random() * jenis.length)];
+                    b.style.left = Math.random() * 100 + "vw";
+                    b.style.fontSize = (Math.random() * 20 + 20) + "px";
+                    b.style.animationDuration = (Math.random() * 3 + 2) + "s";
+                    document.body.appendChild(b);
+                    setTimeout(() => b.remove(), 5000);
+                }, i * 30);
+            }
+        }
+    </script>
+</body>
+</html>
